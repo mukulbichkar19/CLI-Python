@@ -9,10 +9,6 @@ def main():
     for arg in args:
         print('passed argument :: {}'.format(arg)
 
-    if('send-email' in args):
-        sendEmail()
-    #my_object = MyClass('Thomas')
-    #my_object.say_name()
 
 if __name__ == '__main__':
     main()
