@@ -19,10 +19,10 @@ oldDays = 730
 cityTempDiffs = {}
 
 sg = sendgrid.SendGridAPIClient(apikey=config.sendgrid_api)
-from_email = Email("mukulbichkar19@gmail.com")
+from_email = Email(config.from_email)
 content = Content("text/plain", "Here's a test email sent from Python.")
 
-
+#TODO: Remove this function
 def connectToMongo():
     print('Inside connectToMongo')
     db=client.EmailApp
@@ -30,7 +30,7 @@ def connectToMongo():
     serverStatusResult=db.command("serverStatus")
 
 
-
+#TODO: Move cities as an object
 def fetchCitiesFromDB():
 	db = client.EmailApp
 	cities_collection = db.cities
@@ -43,9 +43,9 @@ def fetchCitiesFromDB():
 	return cities
 
 
-
+#TODO: Create a weather class and update the City Object
 def fetchTempDiff(cities):
-	baseUrl = 'http://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=0ecd317431964b70a9c184410192302&'
+	baseUrl = config.weather_base_url
 	formatJ = '&format=json'
 	date = '&date='
 	oldDate = getOldDate()
@@ -73,6 +73,7 @@ def fetchTempDiff(cities):
 
 
 
+# TODO: Store it as a field in Database email message
 def generateEmailContentForCity(cityTempDiffs):
 
 	for k,v in cityTempDiffs.items():
@@ -123,9 +124,12 @@ def getCurrentDate():
 fetchTempDiff(['Boston', 'Seattle'])
 
 def sendEmail():
-    connectToMongo()
-    print('Inside sendEmail')
-    """cities = fetchCitiesFromDB()
-    fetchTempDiff(cities)
-    generateEmailContentForCity(cities)
-    sendEmailHelper(cityTempDiffs)"""
+	print('Inside sendEmail')
+	#connectToMongo()
+	cities = fetchCitiesFromDB()
+	fetchTempDiff(cities)
+	generateEmailContentForCity(cityTempDiffs)
+	sendEmailHelper(cityTempDiffs)
+    
+
+sendEmail()
