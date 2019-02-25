@@ -1,4 +1,5 @@
 import sys
+from .funcmodule import sendEmail
 
 def main():
     print('in main')
@@ -7,6 +8,7 @@ def main():
     for arg in args:
         if('send-email' == arg):
             print('Call send email')
+            sendEmail()
 
 
 if __name__ == '__main__':
