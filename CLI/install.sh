@@ -1,2 +1,1 @@
-pip install -e .
-
+sudo pip install -e .
