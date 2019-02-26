@@ -7,7 +7,6 @@ def main():
     print('count of args :: {}'.format(len(args)))
     for arg in args:
         if('send-email' == arg):
-            print('Call send email')
             sendEmail()
 
 
