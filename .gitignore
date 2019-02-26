@@ -1,2 +1,2 @@
 CLI/cli/config.py
-*.pyc
+CLI/cli/*.pyc
