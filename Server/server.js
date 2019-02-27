@@ -1,10 +1,10 @@
 var express = require('express');
 app = express(),
-port = process.env.PORT || 3000,
-mongoose = require('mongoose'),
-Users = require('./api/models/UsersModel'),
-Cities = require('./api/models/CitiesModel'),
-bodyParser = require('body-parser');
+    port = process.env.PORT || 3000,
+    mongoose = require('mongoose'),
+    Users = require('./api/models/UsersModel'),
+    Cities = require('./api/models/CitiesModel'),
+    bodyParser = require('body-parser');
 const cors = require('cors');
 
 mongoose.Promise = global.Promise;
@@ -22,13 +22,11 @@ userroutes(app); //register the route
 citiesRoute(app);
 
 
-
-
 app.listen(port);
 
 // Add invalid path error message
 app.use(function(req, res) {
-  res.status(404).send({url: req.originalUrl + ' not found'})
+    res.status(404).send({ url: req.originalUrl + ' not found' })
 });
 
-console.log(`API backend server is up and running on port: `,port);
+console.log(`API backend server is up and running on port: `, port);
