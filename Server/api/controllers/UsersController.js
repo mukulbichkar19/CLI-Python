@@ -1,10 +1,8 @@
 'use strict';
  var mongoose = require('mongoose'), Users = mongoose.model('Users'),
  Cities = mongoose.model('Cities');
- var Promise = require("bluebird");
 
 exports.getUsers = function(req, res){
-  console.log('inside get users from git');
   Users.find({}, function(err, users){
     if(err){
       res.send(err);
@@ -48,21 +46,12 @@ exports.createUser = function(req, res) {
                 res.status(200).send({message: 'User created successfully along with updated subscribers list for cities'});
               });
             }else{
-              var subscriberList = city.SubscribersList;
-              subscriberList.push(user._id);
-              var CityName = city.City;
-              let lcity = new Cities({ City: CityName, SubscribersList: subscriberList});
-              Cities.deleteOne({City:city.City}, function(err, city){
-                if(err){
-                  res.send(err);
-                }
-                Cities.create(lcity, function(err, city){
-                  if(err){
-                    res.send(err);
-                  }
-                  res.status(200).send({message: 'User created successfully along with updated list' + city});
+                Cities.updateOne({ city: city.City }, { $push: { SubscribersList: user._id } },
+                    function (err, item) {
+                        if (err)
+                            res.send(err)
+                        res.status(200).send({ message: 'User created successfully along with updated list' + city });
                 });
-              });
             }
           });
         });
