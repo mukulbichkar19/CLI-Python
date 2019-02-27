@@ -25,6 +25,7 @@ async function CheckIfCityExists(city) {
 }
 
 exports.createUser = function(req, res) {
+    console.log(`Inside Create User POST request`);
     let emailId = req.body.emailId;
     let city = req.body.city;
     let newUser = {
@@ -57,7 +58,7 @@ exports.createUser = function(req, res) {
                 });
             });
         } else {
-            res.status(403).send({ message: 'User with same email address exists cannot create a new one.' });
+            res.status(601).send({ message: 'User with same email address exists cannot create a new one.' });
         }
     }).catch(error => console.log(error));
 

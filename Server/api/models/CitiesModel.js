@@ -4,10 +4,10 @@ var Schema = mongoose.Schema;
 var Users = require('./UsersModel');
 
 var CitiesSchema = new Schema({
-  City:{
-    type: String
-  },
-  SubscribersList: [{type: Schema.ObjectId}]
+    City: {
+        type: String
+    },
+    SubscribersList: [{ type: Schema.ObjectId }]
 });
 
 module.exports = mongoose.model('Cities', CitiesSchema);
