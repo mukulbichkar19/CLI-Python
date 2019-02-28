@@ -55,7 +55,6 @@ exports.createUser = function(req, res) {
                             function(err, item) {
                                 if (err)
                                     res.send(err)
-                                console.log('reached here', item);
                                 res.status(200).send({ message: 'User created successfully along with updated list' + city });
                             });
                     }
