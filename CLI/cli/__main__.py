@@ -9,6 +9,5 @@ def main():
         if('send-email' == arg):
             sendEmail()
 
-
 if __name__ == '__main__':
     main()

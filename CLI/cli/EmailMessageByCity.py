@@ -4,7 +4,6 @@ class EmailMessageByCity:
 		self.city = city
 		self.message = message
 
-
 	def getEmailMessage(self):
 		return self.message
 

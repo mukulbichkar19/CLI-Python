@@ -7,7 +7,6 @@ import requests
 from datetime import datetime, timedelta
 import simplejson as json
 from bson.objectid import ObjectId
-
 from Temperature import Temperature
 
 
@@ -17,7 +16,7 @@ class CitiesHandler:
 		self.cityTempDiffs = {}
 		self.oldDays = 730
 
-
+	''' Fetch Cities from Database'''
 	def fetchCitiesFromDB(self):
 		db = client.EmailApp
 		cities_collection = db.cities
@@ -28,6 +27,7 @@ class CitiesHandler:
 		client.close()
 		return cities
 
+	''' Fetch Temperature Difference for each city '''
 	def fetchTempDiff(self, cities):
 		for c in cities:
 			historicalAvgTemp = self.calculateAvgTemp(c, self.getOldDate())
@@ -35,8 +35,7 @@ class CitiesHandler:
 			self.cityTempDiffs[c] = Temperature(historicalAvgTemp, currentAvgTemp,
 													currentAvgTemp-historicalAvgTemp)
 
-
-
+	''' Calculate Difference in average temperature for a given time'''
 	def calculateAvgTemp(self, city, date):
 		baseUrl = config.weather_base_url
 		formatJ = '&format=json'

@@ -15,7 +15,7 @@ class EmailHandler:
 	def __init__(self):
 		self.messageByCity = {}
 
-
+	''' Generate message based on business rules'''
 	def generateMessages(self, cityTempDiffs):
 		for city,temp in cityTempDiffs.items():
 			delta = temp.getAverageTempDelta()
@@ -29,7 +29,7 @@ class EmailHandler:
 			self.messageByCity[city] = message
 
 
-
+	''' Send email to each user of a city'''
 	def sendEmailHelper(self):
 		sg = sendgrid.SendGridAPIClient(apikey=config.sendgrid_api)
 		from_email = Email(config.from_email)
