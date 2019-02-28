@@ -17,7 +17,7 @@ export class EmailSubscribeFormComponent implements OnInit {
   constructor(private subscriptionService: SubscriptionServiceService) {
     this.user = new Users('', '');
   }
-
+  // List of cities
   cities = ['Boston', 'Seattle', 'Philadelphia', 'New York City', 'Tampa',
     'Los Angeles', 'San Francisco', 'Miami', 'Washington DC', 'Chicago', 'Houston',
     'Phoenix', 'San Antonio', 'San Diego', 'Dallas', 'San Jose', 'Austin', 'Jacksonville',
@@ -28,7 +28,6 @@ export class EmailSubscribeFormComponent implements OnInit {
   model = new Email('', this.cities[1]);
 
   submitted = false;
-
 
   res = '';
 
