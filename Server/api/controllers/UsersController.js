@@ -1,5 +1,5 @@
 'use strict';
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
     Users = mongoose.model('Users'),
     Cities = mongoose.model('Cities');
 
@@ -24,8 +24,8 @@ async function CheckIfCityExists(city) {
     return await query.exec();
 }
 
+// Create User
 exports.createUser = function(req, res) {
-    console.log(`Inside Create User POST request`);
     let emailId = req.body.emailId;
     let city = req.body.city;
     let newUser = {
@@ -39,6 +39,8 @@ exports.createUser = function(req, res) {
                 if (err)
                     res.status(500).send({ message: 'Unable to create a user' + err });
                 CheckIfCityExists(user.city).then(city => {
+                    // If user's city does not exist then create the city and add
+                    // him to subscriber list of that city
                     if (city == null) {
                         let lcity = new Cities({ City: user.city, SubscribersList: [user._id] });
                         Cities.create(lcity, function(err, city) {
@@ -48,10 +50,12 @@ exports.createUser = function(req, res) {
                             res.status(200).send({ message: 'User created successfully along with updated subscribers list for cities' });
                         });
                     } else {
-                        Cities.updateOne({ city: city.City }, { $push: { SubscribersList: user._id } },
+                        // City exists just update the Subscriber list with new user
+                        Cities.updateOne({ city: user.City }, { $push: { SubscribersList: user._id } },
                             function(err, item) {
                                 if (err)
                                     res.send(err)
+                                console.log('reached here', item);
                                 res.status(200).send({ message: 'User created successfully along with updated list' + city });
                             });
                     }
@@ -61,12 +65,4 @@ exports.createUser = function(req, res) {
             res.status(601).send({ message: 'User with same email address exists cannot create a new one.' });
         }
     }).catch(error => console.log(error));
-
-
-
-
-
-
-
-
 }

@@ -1,8 +1,8 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var UsersSchema = new Schema({
+const UsersSchema = new Schema({
     emailId: {
         type: String,
         required: 'Mandatory field'

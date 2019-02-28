@@ -1,9 +1,9 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var Users = require('./UsersModel');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var CitiesSchema = new Schema({
+
+const CitiesSchema = new Schema({
     City: {
         type: String
     },
