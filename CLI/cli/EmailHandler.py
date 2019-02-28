@@ -23,7 +23,7 @@ class EmailHandler:
 			if(delta >= 5):
 				message = 'It\'s nice out! Good day for a walk'
 			elif(delta <= -5):
-				message = 'Not so nice out ?Indoor activity to stay fit'
+				message = 'Not so nice out ? Indoor activity to stay fit'
 			else:
 				message = 'Enjoy a warm cuisine'
 			self.messageByCity[city] = message
@@ -33,7 +33,7 @@ class EmailHandler:
 	def sendEmailHelper(self):
 		sg = sendgrid.SendGridAPIClient(apikey=config.sendgrid_api)
 		from_email = Email(config.from_email)
-		content = Content("text/plain", "Here's a test email sent from Python.")
+		content = Content("text/plain", "Here's a test email sent from Weather NewsLetter App. Thanks.")
 		db = client.EmailApp
 		cities_collection = db.cities
 		user_collection = db.users
@@ -46,7 +46,7 @@ class EmailHandler:
 			for subscriber in subscribersList:
 				cur = user_collection.find({'_id':ObjectId(subscriber)})
 				for u in cur:
-					to_email = Email(str(u['EmailId']))
+					to_email = Email(str(u['emailId']))
 					subjectMessage = 'Subject: ' + msg
 					mail = Mail(from_email, subjectMessage,to_email, content)
 					response = sg.client.mail.send.post(request_body=mail.get())

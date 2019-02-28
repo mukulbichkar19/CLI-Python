@@ -61,7 +61,6 @@ class CitiesHandler:
 		return datetime.today()-timedelta(days=1)
 
 	def generateTempDiffs(self):
-		print('inside generateTempDiffs')
 		allCities = self.fetchCitiesFromDB()
 		self.fetchTempDiff(allCities)
 		return self.cityTempDiffs
