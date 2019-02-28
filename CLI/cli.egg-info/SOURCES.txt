@@ -1,3 +1,7 @@
+cli/CitiesHandler.py
+cli/EmailHandler.py
+cli/EmailMessageByCity.py
+cli/Temperature.py
 cli/__init__.py
 cli/__main__.py
 cli/classmodule.py
